@@ -1,0 +1,24 @@
+targets:
+  $default:
+    sources:
+      - lib/**
+      - graphql/**
+      - $package$
+      - schema.graphql
+    builders:
+      artemis:
+        options:
+          generate_helpers: true
+          schema_mapping:
+            - schema: schema.graphql
+              queries_glob: graphql/files.graphql
+              output: lib/src/graphql/files.graphql.dart
+          custom_parser_import: 'package:graph_test/src/graphql_parsers/datetime_parser.dart'
+          scalar_mapping:
+            - graphql_type: timestamp
+              dart_type: DateTime
+              use_custom_parser: true
+            - graphql_type: bigint
+              dart_type: int
+            - graphql_type: json
+              dart_type: String

@@ -1,0 +1,28 @@
+subscription GetFilesStreaming {
+  files {
+    id
+    name
+    download_url
+    delete_url
+    time
+  }
+}
+
+mutation UpdateFile($id: Int!, $changes: files_set_input) {
+  update_files(_set: $changes, where: {id: {_eq: $id}}) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
+
+query GetFile($changes: files_bool_exp) {
+  files(where: $changes) {
+    id
+    name
+    time
+    download_url
+    delete_url
+  }
+}

@@ -1,0 +1,517 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"""whether this query should be cached (Hasura Cloud only)"""
+directive @cached(
+  """measured in seconds"""
+  ttl: Int! = 60
+
+  """refresh the cache entry"""
+  refresh: Boolean! = false
+) on QUERY
+
+scalar bigint
+
+"""
+Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'.
+"""
+input bigint_comparison_exp {
+  _eq: bigint
+  _gt: bigint
+  _gte: bigint
+  _in: [bigint!]
+  _is_null: Boolean
+  _lt: bigint
+  _lte: bigint
+  _neq: bigint
+  _nin: [bigint!]
+}
+
+"""
+Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
+"""
+input Boolean_comparison_exp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _is_null: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
+
+
+"""
+columns and relationships of "files"
+"""
+type files {
+  delete_url: String!
+  download_url: String!
+  id: Int!
+  name: String!
+  time: timestamp!
+}
+
+"""
+aggregated selection of "files"
+"""
+type files_aggregate {
+  aggregate: files_aggregate_fields
+  nodes: [files!]!
+}
+
+"""
+aggregate fields of "files"
+"""
+type files_aggregate_fields {
+  avg: files_avg_fields
+  count(columns: [files_select_column!], distinct: Boolean): Int!
+  max: files_max_fields
+  min: files_min_fields
+  stddev: files_stddev_fields
+  stddev_pop: files_stddev_pop_fields
+  stddev_samp: files_stddev_samp_fields
+  sum: files_sum_fields
+  var_pop: files_var_pop_fields
+  var_samp: files_var_samp_fields
+  variance: files_variance_fields
+}
+
+"""aggregate avg on columns"""
+type files_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "files". All fields are combined with a logical 'AND'.
+"""
+input files_bool_exp {
+  _and: [files_bool_exp!]
+  _not: files_bool_exp
+  _or: [files_bool_exp!]
+  delete_url: String_comparison_exp
+  download_url: String_comparison_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+  time: timestamp_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "files"
+"""
+enum files_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  files_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "files"
+"""
+input files_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "files"
+"""
+input files_insert_input {
+  delete_url: String
+  download_url: String
+  id: Int
+  name: String
+  time: timestamp
+}
+
+"""aggregate max on columns"""
+type files_max_fields {
+  delete_url: String
+  download_url: String
+  id: Int
+  name: String
+  time: timestamp
+}
+
+"""aggregate min on columns"""
+type files_min_fields {
+  delete_url: String
+  download_url: String
+  id: Int
+  name: String
+  time: timestamp
+}
+
+"""
+response of any mutation on the table "files"
+"""
+type files_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [files!]!
+}
+
+"""
+on_conflict condition type for table "files"
+"""
+input files_on_conflict {
+  constraint: files_constraint!
+  update_columns: [files_update_column!]! = []
+  where: files_bool_exp
+}
+
+
+"""primary key columns input for table: files"""
+input files_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "files"
+"""
+enum files_select_column {
+  """column name"""
+  delete_url
+
+  """column name"""
+  download_url
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  time
+}
+
+"""
+input type for updating data in table "files"
+"""
+input files_set_input {
+  delete_url: String
+  download_url: String
+  id: Int
+  name: String
+  time: timestamp
+}
+
+"""aggregate stddev on columns"""
+type files_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type files_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type files_stddev_samp_fields {
+  id: Float
+}
+
+
+"""Initial value of the column from where the streaming should start"""
+input files_stream_cursor_value_input {
+  delete_url: String
+  download_url: String
+  id: Int
+  name: String
+  time: timestamp
+}
+
+"""aggregate sum on columns"""
+type files_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "files"
+"""
+enum files_update_column {
+  """column name"""
+  delete_url
+
+  """column name"""
+  download_url
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  time
+}
+
+input files_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: files_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: files_set_input
+
+  """filter the rows which have to be updated"""
+  where: files_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type files_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type files_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type files_variance_fields {
+  id: Float
+}
+
+"""
+Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
+"""
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+scalar json
+
+"""
+Boolean expression to compare columns of type "json". All fields are combined with logical 'AND'.
+"""
+input json_comparison_exp {
+  _eq: json
+  _gt: json
+  _gte: json
+  _in: [json!]
+  _is_null: Boolean
+  _lt: json
+  _lte: json
+  _neq: json
+  _nin: [json!]
+}
+
+
+
+scalar timestamp
+
+"""
+Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'.
+"""
+input timestamp_comparison_exp {
+  _eq: timestamp
+  _gt: timestamp
+  _gte: timestamp
+  _in: [timestamp!]
+  _is_null: Boolean
+  _lt: timestamp
+  _lte: timestamp
+  _neq: timestamp
+  _nin: [timestamp!]
+}
+
+
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: String
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+  _is_null: Boolean
+
+  """does the column match the given pattern"""
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """does the column NOT match the given pattern"""
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """does the column match the given SQL regular expression"""
+  _similar: String
+}
+
+
+type query_root {
+
+  """
+  fetch data from the table: "files"
+  """
+  files(
+    """distinct select on columns"""
+    distinct_on: [files_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """filter the rows returned"""
+    where: files_bool_exp
+  ): [files!]!
+
+  """
+  fetch aggregated fields from the table: "files"
+  """
+  files_aggregate(
+    """distinct select on columns"""
+    distinct_on: [files_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """filter the rows returned"""
+    where: files_bool_exp
+  ): files_aggregate!
+
+  """fetch data from the table: "files" using primary key columns"""
+  files_by_pk(id: Int!): files
+}
+
+"""mutation root"""
+type mutation_root {
+  """
+  update data of the table: "files"
+  """
+  update_files(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: files_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: files_set_input
+
+    """filter the rows which have to be updated"""
+    where: files_bool_exp!
+  ): files_mutation_response
+
+  """
+  update single row of the table: "files"
+  """
+  update_files_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: files_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: files_set_input
+    pk_columns: files_pk_columns_input!
+  ): files
+
+  """
+  update multiples rows of table: "files"
+  """
+  update_files_many(
+    """updates to execute, in order"""
+    updates: [files_updates!]!
+  ): [files_mutation_response]
+}
+
+type subscription_root {
+
+  """
+  fetch data from the table: "files"
+  """
+  files(
+    """distinct select on columns"""
+    distinct_on: [files_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """filter the rows returned"""
+    where: files_bool_exp
+  ): [files!]!
+
+  """
+  fetch aggregated fields from the table: "files"
+  """
+  files_aggregate(
+    """distinct select on columns"""
+    distinct_on: [files_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """filter the rows returned"""
+    where: files_bool_exp
+  ): files_aggregate!
+
+  """fetch data from the table: "files" using primary key columns"""
+  files_by_pk(id: Int!): files
+
+  """
+  fetch data from the table in a streaming manner: "files"
+  """
+  files_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """filter the rows returned"""
+    where: files_bool_exp
+  ): [files!]!
+
+}

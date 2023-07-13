@@ -1,0 +1,25 @@
+name: graphql_comparsion_problem
+description: A sample command-line application.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.0.0
+
+# Add regular dependencies here.
+dependencies:
+  artemis:
+    git:
+      url: git@github.com:comigor/artemis.git
+      ref: 0301b81994431300ece65b8cee08a517fe54d8f3
+  json_annotation: ^4.8.1
+  equatable: ^2.0.5
+  gql: ^0.14.0
+  gql_websocket_link: ^0.3.4
+  gql_link: ^0.5.1
+  web_socket_channel: ^2.4.0
+
+dev_dependencies:
+  lints: ^2.0.0
+  build_runner: ^2.4.5
+  json_serializable: ^6.7.0
